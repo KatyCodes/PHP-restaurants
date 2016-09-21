@@ -157,6 +157,23 @@
             $this->assertEquals([$restaurant, $restaurant_two], $result);
 
         }
+
+        function test_update()
+        {
+            //arrange
+            $type = "Italian";
+            $cuisine = new Cuisine($id=null, $type);
+            $cuisine->save();
+
+            $new_type = "Fusion";
+
+            //act
+            $cuisine->update($new_type);
+
+            //assert
+            $this->assertEquals($new_type, $cuisine->getType());
+
+        }
     }
 
  ?>

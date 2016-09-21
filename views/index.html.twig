@@ -18,10 +18,15 @@
             {% if cuisines is not empty %}
 
                 {% for cuisine in cuisines %}
-                <p> {{ cuisine.getType }} </p>
+                <p><a href="/getCuisine/{{ cuisine.getId }}">{{ cuisine.getType }}</a> </p>
                 {% endfor %}
-                
+
+                <form action="/deleteCuisines" method="post">
+                    <button type="submit" class="btn">Delete Cuisines</button>
+                </form>
+
             {% endif %}
+
         </div>
     </body>
 </html>
