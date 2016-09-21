@@ -1,39 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <!-- <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"> -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link href="css/styles.css" rel="stylesheet" type="text/css">
-        <title></title>
-    </head>
-    <body>
-        <div class="container">
-            <h1>Best Restaurants in Oregon</h1>
-            <h2>{{ cuisine.getType }}</h2>
-            <a href="/updateCuisine/{{ cuisine.getId }}">Update Cuisine</a>
+<head>
+    <meta charset="utf-8">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <title></title>
+</head>
+<body>
+    <div class="container">
+        <h1>Best Restaurants in Oregon</h1>
+        <h2>{{ cuisine.getType }}</h2>
 
-            <form action="/addRestaurant" method="post">
-                <input id="cuisine_id" value="{{ cuisine.getId }}" type="hidden" name="cuisine_id">
-                <label for="restaurant">Enter a restaurant name:</label>
-                <input id="name" class="form-control" type="text" name="name">
-                <label for="restaurant">Rate the restaurant:</label>
-                <input id="rate" class="form-control" type="number" name="rate">
-                <button type="submit" class="btn">Add a restaurant</button>
+        <a href="/updateCuisine/{{ cuisine.getId }}">Update Cuisine</a>
+
+        <form action="/addRestaurant" method="post">
+            <input id="cuisine_id" value="{{ cuisine.getId }}" type="hidden" name="cuisine_id">
+            <label for="restaurant">Enter a restaurant name:</label>
+            <input id="name" class="form-control" type="text" name="name" required>
+            <label for="restaurant">Rate the restaurant:</label>
+            <input id="rate" class="form-control" type="number" name="rate" required>
+            <button type="submit" class="btn">Add a restaurant</button>
+        </form>
+
+        {% if restaurants is not empty %}
+
+            {% for restaurant in restaurants %}
+            <h3>Name: {{ restaurant.getName }}, Rating: {{ restaurant.getRate }} </h3>
+            {% endfor %}
+
+            <form action="/deleteRestaurants" method="post">
+                <button type="submit" class="btn">Delete Restaurants</button>
             </form>
 
-            {% if restaurants is not empty %}
-
-                {% for restaurant in restaurants %}
-                <h3>Name: {{ restaurant.getName }}, Rating: {{ restaurant.getRate }} </h3>
-                {% endfor %}
-
-                <form action="/deleteRestaurants" method="post">
-                    <button type="submit" class="btn">Delete Restaurants</button>
-                </form>
-
-            {% endif %}
-
-        </div>
-    </body>
+        {% endif %}
+        <br>
+        <form action="/deleteCuisine/{{ cuisine.getId }}" method="post">
+            <input name="_method" type="hidden" value="delete">
+            <button class="btn" type="submit">Delete Cuisine</button>
+        </form>
+        <br>
+        <a href="/">Home</a>
+    </div>
+</body>
 </html>

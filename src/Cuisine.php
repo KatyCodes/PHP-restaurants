@@ -52,6 +52,12 @@
             $this->setType($new_type);
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM cuisines WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE cuisine_id = {$this->getId()};");
+        }
+
         static function getAll()
         {
             $returned_cuisines = $GLOBALS['DB']->query("SELECT * FROM cuisines;");
@@ -81,6 +87,7 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM cuisines;");
+
         }
     }
 

@@ -18,6 +18,7 @@
     'twig.path' => __DIR__.'/../views'
     ));
 
+    //for CRUD functionality
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
 
@@ -54,6 +55,12 @@
         $cuisine = Cuisine::find($id);
         $cuisine->update($type);
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
+    });
+
+    $app->delete("/deleteCuisine/{id}", function($id) use ($app){
+        $cuisine = Cuisine::find($id);
+        $cuisine->delete();
+        return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
     });
 
     $app->post("/addRestaurant", function() use ($app) {

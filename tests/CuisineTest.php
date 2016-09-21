@@ -174,6 +174,46 @@
             $this->assertEquals($new_type, $cuisine->getType());
 
         }
+
+        function test_delete()
+        {
+            //arrange
+            $type = "Italian";
+            $cuisine = new Cuisine($id=null, $type);
+            $cuisine->save();
+
+            $new_type = "Fusion";
+            $cuisine2 = new Cuisine($id=null, $type);
+            $cuisine2->save();
+
+            //act
+            $cuisine->delete();
+
+            //assert
+            $this->assertEquals([$cuisine2], Cuisine::getAll());
+
+        }
+
+        function test_delete_cuisine_retaurants()
+        {
+            //arrange
+            $type = "Italian";
+            $cuisine = new Cuisine($id=null, $type);
+            $cuisine->save();
+
+            $cuisine_id = $cuisine->getId();
+            $name = "Pizzeria";
+            $rate= 4;
+            $restaurant = new Restaurant ($id=null, $cuisine_id, $name, $rate);
+            $restaurant->save();
+
+            //act
+            $cuisine->delete();
+
+            //assert
+            $this->assertEquals([], Restaurant::getAll());
+
+        }
     }
 
  ?>
