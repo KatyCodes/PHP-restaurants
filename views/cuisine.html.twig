@@ -12,8 +12,16 @@
         <h1>Best Restaurants in Oregon</h1>
         <h2>{{ cuisine.getType }}</h2>
 
-        <a href="/updateCuisine/{{ cuisine.getId }}">Update Cuisine</a>
+        <form action="/deleteCuisine/{{ cuisine.getId }}" method="post">
+            <input name="_method" type="hidden" value="delete">
+            <button class="btn" type="submit">Delete Cuisine</button>
+        </form>
+        <br>
+        <form action="/updateCuisine/{{ cuisine.getId }}">
+            <button class="btn" type="submit">Update Cuisine</button>
+        </form>
 
+        <br>
         <form action="/addRestaurant" method="post">
             <input id="cuisine_id" value="{{ cuisine.getId }}" type="hidden" name="cuisine_id">
             <label for="restaurant">Enter a restaurant name:</label>
@@ -35,10 +43,7 @@
 
         {% endif %}
         <br>
-        <form action="/deleteCuisine/{{ cuisine.getId }}" method="post">
-            <input name="_method" type="hidden" value="delete">
-            <button class="btn" type="submit">Delete Cuisine</button>
-        </form>
+
         <br>
         <a href="/">Home</a>
     </div>
