@@ -154,6 +154,31 @@
 
         }
 
+        function test_find()
+        {
+            //arrange
+            $id = 2;
+            $cuisine_id = 1;
+            $name = "TALKO Taco";
+            $rate = 4;
+            $restaurant = new Restaurant($id, $cuisine_id, $name, $rate);
+            $restaurant->save();
+
+            $id = 2;
+            $cuisine_id = 1;
+            $name = "Pizzeria";
+            $rate = 4;
+            $restaurant_two = new Restaurant($id, $cuisine_id, $name, $rate);
+            $restaurant_two->save();
+
+            //act
+            $result = Restaurant::find($restaurant->getId());
+
+            //assert
+            $this->assertEquals($restaurant, $result);
+
+        }
+
     }
 
  ?>

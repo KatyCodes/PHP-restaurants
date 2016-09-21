@@ -57,10 +57,74 @@
             $cuisine->save();
 
             //act
-            $result = $cuisine::getAll();
+            $result = $cuisine->getAll();
 
             //assert
             $this->assertEquals($cuisine, $result[0]);
+
+        }
+
+        function test_getAll()
+        {
+            //arrange
+            $id = 15;
+            $type = "Italian";
+            $cuisine = new Cuisine($id, $type);
+            $cuisine->save();
+
+            $id = 15;
+            $type = "Italian";
+            $cuisine_two = new Cuisine($id, $type);
+            $cuisine_two->save();
+
+            //act
+            $result = Cuisine::getAll();
+
+            //assert
+            $this->assertEquals([$cuisine, $cuisine_two], $result);
+
+        }
+
+        function test_deleteAll()
+        {
+            //arrange
+            $id = 15;
+            $type = "Italian";
+            $cuisine = new Cuisine($id, $type);
+            $cuisine->save();
+
+            $id = 15;
+            $type = "Italian";
+            $cuisine_two = new Cuisine($id, $type);
+            $cuisine_two->save();
+
+            //act
+            $result = Cuisine::deleteAll();
+
+            //assert
+            $result = Cuisine::getAll();
+            $this->assertEquals([], $result);
+
+        }
+
+        function test_find()
+        {
+            //arrange
+            $id = 15;
+            $type = "Italian";
+            $cuisine = new Cuisine($id, $type);
+            $cuisine->save();
+
+            $id = 15;
+            $type = "Italian";
+            $cuisine_two = new Cuisine($id, $type);
+            $cuisine_two->save();
+
+            //act
+            $result = Cuisine::find($cuisine->getId());
+
+            //assert
+            $this->assertEquals($cuisine, $result);
 
         }
     }
