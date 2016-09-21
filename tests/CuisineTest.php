@@ -5,6 +5,7 @@
     */
 
     require_once "src/Cuisine.php";
+    require_once "src/Restaurant.php";
 
     $server = 'mysql:host=localhost;dbname=best_restaurants_test';
     $username = 'root';
@@ -16,6 +17,7 @@
         protected function tearDown()
         {
           Cuisine::deleteAll();
+          Restaurant::deleteAll();
         }
 
         function test_getId()
@@ -125,6 +127,34 @@
 
             //assert
             $this->assertEquals($cuisine, $result);
+
+        }
+
+        function test_getRestaurants()
+        {
+            //arrange
+            $id = 15;
+            $type = "Italian";
+            $cuisine = new Cuisine($id, $type);
+            $cuisine->save();
+
+            $cuisine_id = $cuisine->getId();
+
+            $name = "TALKO Taco";
+            $rate = 4;
+            $restaurant = new Restaurant($id, $cuisine_id, $name, $rate);
+            $restaurant->save();
+
+            $name = "Pizzeria";
+            $rate = 4;
+            $restaurant_two = new Restaurant($id, $cuisine_id, $name, $rate);
+            $restaurant_two->save();
+
+            //act
+            $result = $cuisine->getRestaurants();
+
+            //assert
+            $this->assertEquals([$restaurant, $restaurant_two], $result);
 
         }
     }

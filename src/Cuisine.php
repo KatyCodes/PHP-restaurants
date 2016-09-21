@@ -25,6 +25,21 @@
             return $this->type;
         }
 
+        function getRestaurants()
+        {
+            $restaurants = array();
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants WHERE cuisine_id = {$this->getId()};");
+            foreach($returned_restaurants as $restaurant){
+                $id = $restaurant['id'];
+                $cuisine_id = $restaurant['cuisine_id'];
+                $name = $restaurant['name'];
+                $rate = $restaurant['rate'];
+                $new_restaurant = new Restaurant($id, $cuisine_id, $name, $rate);
+                array_push($restaurants, $new_restaurant);
+            }
+            return $restaurants;
+        }
+
         function save()
         {
             $GLOBALS['DB']->exec("INSERT INTO cuisines (type) VALUES ('{$this->getType()}')");

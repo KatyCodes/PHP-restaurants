@@ -5,6 +5,7 @@
     */
 
     require_once "src/Restaurant.php";
+    require_once "src/Cuisine.php";
 
     $server = 'mysql:host=localhost;dbname=best_restaurants_test';
     $username = 'root';
@@ -15,13 +16,18 @@
     {
         protected function tearDown(){
             Restaurant::deleteAll();
+            Cuisine::deleteAll();
         }
 
         function test_getId()
         {
             //arrange
-            $id = 2;
-            $cuisine_id = 1;
+            $id = 1;
+            $type = "Mexican Food";
+            $cuisine = new Cuisine($id, $type);
+            $cuisine->save();
+
+            $cuisine_id = $cuisine->getId();
             $name = "TALKO Taco";
             $rate = 4;
             $restaurant = new Restaurant($id, $cuisine_id, $name, $rate);
@@ -30,15 +36,19 @@
             $result = $restaurant->getId();
 
             //assert
-            $this->assertEquals($id, $result);
+            $this->assertEquals(true, is_numeric($result));
 
         }
 
         function test_getCuisineId()
         {
             //arrange
-            $id = 2;
-            $cuisine_id = 1;
+            $id = 1;
+            $type = "Mexican Food";
+            $cuisine = new Cuisine($id, $type);
+            $cuisine->save();
+
+            $cuisine_id = $cuisine->getId();
             $name = "TALKO Taco";
             $rate = 4;
             $restaurant = new Restaurant($id, $cuisine_id, $name, $rate);
@@ -47,15 +57,19 @@
             $result = $restaurant->getCuisineId();
 
             //assert
-            $this->assertEquals($cuisine_id, $result);
+            $this->assertEquals(true, is_numeric($result));
 
         }
 
         function test_getName()
         {
             //arrange
-            $id = 2;
-            $cuisine_id = 1;
+            $id = 1;
+            $type = "Mexican Food";
+            $cuisine = new Cuisine($id, $type);
+            $cuisine->save();
+
+            $cuisine_id = $cuisine->getId();
             $name = "TALKO Taco";
             $rate = 4;
             $restaurant = new Restaurant($id, $cuisine_id, $name, $rate);
@@ -71,8 +85,12 @@
         function test_getRate()
         {
             //arrange
-            $id = 2;
-            $cuisine_id = 1;
+            $id = 1;
+            $type = "Mexican Food";
+            $cuisine = new Cuisine($id, $type);
+            $cuisine->save();
+
+            $cuisine_id = $cuisine->getId();
             $name = "TALKO Taco";
             $rate = 4;
             $restaurant = new Restaurant($id, $cuisine_id, $name, $rate);
@@ -88,8 +106,12 @@
         function test_save()
         {
             //arrange
-            $id = 2;
-            $cuisine_id = 1;
+            $id = 1;
+            $type = "Mexican Food";
+            $cuisine = new Cuisine($id, $type);
+            $cuisine->save();
+
+            $cuisine_id = $cuisine->getId();
             $name = "TALKO Taco";
             $rate = 4;
             $restaurant = new Restaurant($id, $cuisine_id, $name, $rate);
@@ -106,8 +128,12 @@
         function test_getAll()
         {
             //arrange
-            $id = 2;
-            $cuisine_id = 1;
+            $id = 1;
+            $type = "Mexican Food";
+            $cuisine = new Cuisine($id, $type);
+            $cuisine->save();
+
+            $cuisine_id = $cuisine->getId();
             $name = "TALKO Taco";
             $rate = 4;
             $restaurant = new Restaurant($id, $cuisine_id, $name, $rate);
@@ -131,8 +157,12 @@
         function test_deleteAll()
         {
             //arrange
-            $id = 2;
-            $cuisine_id = 1;
+            $id = 1;
+            $type = "Mexican Food";
+            $cuisine = new Cuisine($id, $type);
+            $cuisine->save();
+
+            $cuisine_id = $cuisine->getId();
             $name = "TALKO Taco";
             $rate = 4;
             $restaurant = new Restaurant($id, $cuisine_id, $name, $rate);
@@ -157,8 +187,12 @@
         function test_find()
         {
             //arrange
-            $id = 2;
-            $cuisine_id = 1;
+            $id = 1;
+            $type = "Mexican Food";
+            $cuisine = new Cuisine($id, $type);
+            $cuisine->save();
+
+            $cuisine_id = $cuisine->getId();
             $name = "TALKO Taco";
             $rate = 4;
             $restaurant = new Restaurant($id, $cuisine_id, $name, $rate);
