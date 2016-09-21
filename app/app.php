@@ -18,6 +18,9 @@
     'twig.path' => __DIR__.'/../views'
     ));
 
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
+
     $app->get("/", function() use ($app) {
         return $app['twig']->render('index.html.twig', array('cuisines' =>  Cuisine::getAll()));
     });
@@ -33,8 +36,23 @@
         return $app['twig']->render('index.html.twig', array('cuisines' =>  Cuisine::getAll()));
     });
 
+    //from index to cuisine page showing all restaurants for that cuisine
     $app->get("/getCuisine/{id}", function($id) use ($app){
         $cuisine = Cuisine::find($id);
+        return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
+    });
+
+    //Routes to update cuisine name
+    $app->get("/updateCuisine/{id}", function($id) use($app) {
+        $cuisine = Cuisine::find($id);
+        return $app['twig']->render('cuisine_edit.html.twig', array('cuisine' => $cuisine));
+    });
+
+    //after updating will lead back to that cuisine page
+    $app->patch("/updatedCuisine/{id}", function($id) use ($app){
+        $type = $_POST['type'];
+        $cuisine = Cuisine::find($id);
+        $cuisine->update($type);
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
     });
 

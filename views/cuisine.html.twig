@@ -11,6 +11,8 @@
         <div class="container">
             <h1>Best Restaurants in Oregon</h1>
             <h2>{{ cuisine.getType }}</h2>
+            <a href="/updateCuisine/{{ cuisine.getId }}">Update Cuisine</a>
+
             <form action="/addRestaurant" method="post">
                 <input id="cuisine_id" value="{{ cuisine.getId }}" type="hidden" name="cuisine_id">
                 <label for="restaurant">Enter a restaurant name:</label>
