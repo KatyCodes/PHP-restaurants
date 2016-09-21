@@ -2,48 +2,52 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <!-- <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="css/styles.css" rel="stylesheet" type="text/css">
-    <title></title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
+    <title>Best Restaraunts in Oregon</title>
 </head>
 <body>
+    <h1>Best Restaurants in Oregon</h1>
     <div class="container">
-        <h1>Best Restaurants in Oregon</h1>
-        <h2>{{ cuisine.getType }}</h2>
+        <h2>{{ cuisine.getType }} Food</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Add a Restaurant</h3>
+                <form action="/addRestaurant" method="post">
+                    <input id="cuisine_id" value="{{ cuisine.getId }}" type="hidden" name="cuisine_id">
+                    <label for="restaurant">Enter a restaurant name:</label>
+                    <input id="name" class="form-control" type="text" name="name" required>
+                    <label for="restaurant">Rate the restaurant:</label>
+                    <input id="rate" class="form-control" type="number" name="rate" required>
+                    <button type="submit" class="btn">Add a restaurant</button>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <h3>Restaurants with {{ cuisine.getType }} food</h3>
+                {% if restaurants is not empty %}
+                    {% for restaurant in restaurants %}
+                    <h3>Name: {{ restaurant.getName }}, Rating: {{ restaurant.getRate }} </h3>
+                    {% endfor %}
 
-        <form action="/deleteCuisine/{{ cuisine.getId }}" method="post">
-            <input name="_method" type="hidden" value="delete">
-            <button class="btn" type="submit">Delete Cuisine</button>
-        </form>
-        <br>
-        <form action="/updateCuisine/{{ cuisine.getId }}">
-            <button class="btn" type="submit">Update Cuisine</button>
-        </form>
+                    <form action="/deleteRestaurants" method="post">
+                        <button type="submit" class="btn">Delete Restaurants</button>
+                    </form>
 
-        <br>
-        <form action="/addRestaurant" method="post">
-            <input id="cuisine_id" value="{{ cuisine.getId }}" type="hidden" name="cuisine_id">
-            <label for="restaurant">Enter a restaurant name:</label>
-            <input id="name" class="form-control" type="text" name="name" required>
-            <label for="restaurant">Rate the restaurant:</label>
-            <input id="rate" class="form-control" type="number" name="rate" required>
-            <button type="submit" class="btn">Add a restaurant</button>
-        </form>
-
-        {% if restaurants is not empty %}
-
-            {% for restaurant in restaurants %}
-            <h3>Name: {{ restaurant.getName }}, Rating: {{ restaurant.getRate }} </h3>
-            {% endfor %}
-
-            <form action="/deleteRestaurants" method="post">
-                <button type="submit" class="btn">Delete Restaurants</button>
-            </form>
-
-        {% endif %}
-        <br>
-
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <h3>Update/Delete this Cuisine</h3>
+                <form action="/deleteCuisine/{{ cuisine.getId }}" method="post">
+                    <input name="_method" type="hidden" value="delete">
+                    <button class="btn" type="submit">Delete Cuisine</button>
+                </form>
+                <br>
+                <form action="/updateCuisine/{{ cuisine.getId }}">
+                    <button class="btn" type="submit">Update Cuisine</button>
+                </form>
+            </div>
+            <br>
+        </div>
         <br>
         <a href="/">Home</a>
     </div>
