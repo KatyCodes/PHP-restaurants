@@ -72,7 +72,6 @@
 
     //leads to individual restaurant info page
     $app->get("/confirmDeleteRestaurant/{id}", function($id) use ($app){
-        // $restaurant = Restaurant::find($id);
         $cuisine = Cuisine::find($id);
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
     });
