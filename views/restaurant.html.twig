@@ -17,15 +17,37 @@
                 <form action="/updatedRestaurant/{{ restaurant.getId }}" method="post">
                     <input type="hidden" value="patch" name="_method">
                     <label for="name">Update the Name</label>
-                    <input id="name" class="form-control" type="text" name="name">
+                    <input id="name" class="form-control" type="text" name="name" required>
                     <label for="rate">Update the Rating</label>
-                    <input id="rate" class="form-control" type="number" name="rate">
+                    <input id="rate" class="form-control" type="number" name="rate" min="1" max="5">
                     <br>
                     <button class="btn" type="submit">Update Restaurant</button>
                 </form>
             </div>
             <div class="col-md-4">
-                <h3>User Rating: {{ restaurant.getRate }} </h3>
+                <h3>User Rating:
+                    {% if restaurant.getRate == 1 %}
+                        <img src="/star.png">
+                    {% elseif restaurant.getRate == 2 %}
+                        <img src="/star.png">
+                        <img src="/star.png">
+                    {% elseif restaurant.getRate == 3 %}
+                        <img src="/star.png">
+                        <img src="/star.png">
+                        <img src="/star.png">
+                    {% elseif restaurant.getRate == 4 %}
+                        <img src="/star.png">
+                        <img src="/star.png">
+                        <img src="/star.png">
+                        <img src="/star.png">
+                    {% else %}
+                        <img src="/star.png">
+                        <img src="/star.png">
+                        <img src="/star.png">
+                        <img src="/star.png">
+                        <img src="/star.png">
+                    {% endif %}
+                </h3>
                 <h3>Cuisine Type: {{ cuisine.getType }} </h3>
             </div>
             <div class="col-md-4">
