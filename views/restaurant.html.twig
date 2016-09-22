@@ -10,9 +10,11 @@
 <body>
     <h1>Best Restaurants in Oregon</h1>
     <div class="container">
-            <h3>{{ restaurant.getName }}</h3>
+        <h2>Restaurant: {{ restaurant.getName }} </h2>
         <div class="row">
             <div class="col-md-4">
+                <h3>User Rating: {{ restaurant.getRate }} </h3>
+                <h3>Cuisine Type: {{ cuisine.getType }} </h3>
             </div>
             <div class="col-md-4">
                 <form action="/updatedRestaurant/{{ restaurant.getId }}" method="post">
