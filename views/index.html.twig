@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet" type="text/css">
     <title>Best Restaraunts in Oregon</title>
 </head>
@@ -22,9 +23,9 @@
                 {% if cuisines is not empty %}
                     <h2>Click to add or see more:</h2>
                     {% for cuisine in cuisines %}
-                    <p><a href="/getCuisine/{{ cuisine.getId }}">{{ cuisine.getType }}</a> </p>
+                    <h4><a href="/getCuisine/{{ cuisine.getId }}">{{ cuisine.getType }}</a> </h4>
                     {% endfor %}
-
+                    <br>
                     <form action="/deleteCuisines" method="post">
                         <button type="submit" class="btn">Delete ALL Cuisines</button>
                     </form>
