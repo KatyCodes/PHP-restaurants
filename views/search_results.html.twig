@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
+    <title>Best Restaraunts in Oregon</title>
+</head>
+<body>
+    <h1>Best Restaurants in Oregon</h1>
+    <div class="container">
+        <h2>
+            {% if results is not empty %}
+                {% for result in results %}
+                    <h3> We found a match! </h3>
+                    <h4><a href="/getRestaurant/{{ result.getId }}">{{ result.getName }}</a></h4>
+                {% endfor %}
+            {% else %}
+                <h4> Your search does not match any restaurants! </h4>
+            {% endif %}
+        </h2>
+        <br>
+        <p>
+            <a href="/confirmDeleteRestaurant/{{ cuisine.getId }}">Back to Cuisine</a>
+            <br>
+            You don't have to go <a href="/">Home</a> but you can't stay here.
+        </p>
+
+    </div>
+</body>
+</html>

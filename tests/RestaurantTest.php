@@ -212,7 +212,34 @@
             $this->assertEquals($restaurant, $result);
 
         }
+        function test_search()
+        {
+            //arrange
+            $id = null;
+            $type = "Mexican Food";
+            $cuisine = new Cuisine($id, $type);
+            $cuisine->save();
 
+            $cuisine_id = $cuisine->getId();
+            $name = "TALKO Taco";
+            $rate = 4;
+            $restaurant = new Restaurant($id, $cuisine_id, $name, $rate);
+            $restaurant->save();
+
+            $name = "Pizzeria";
+            $rate = 4;
+            $restaurant_two = new Restaurant($id, $cuisine_id, $name, $rate);
+            $restaurant_two->save();
+
+            $search = "Pizzeria";
+
+            //act
+            $result = Restaurant::search($cuisine_id, $search);
+
+            //assert
+            $this->assertEquals([$search], $result);
+
+        }
     }
 
  ?>

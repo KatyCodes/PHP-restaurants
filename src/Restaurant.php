@@ -63,6 +63,20 @@
             $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE id = {$this->getId()};");
         }
 
+        static function search($cuisineid, $search)
+        {
+            $search_results = array();
+            $restaurants = Restaurant::getAll();
+            foreach($restaurants as $restaurant){
+                if(strtolower($restaurant->getName()) == strtolower($search)){
+                    if($cuisineid == $restaurant->getCuisineId()){
+                        array_push($search_results, $restaurant);
+                    }
+                }
+            }
+            return $search_results;
+        }
+
         static function getAll()
         {
             $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants;");
