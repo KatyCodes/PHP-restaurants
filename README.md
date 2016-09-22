@@ -6,7 +6,7 @@
 
 ## Description
 
-This is a dynamic site that takes user input and generates lists of restaurants and organizes them based on their cuisine using MySQL. Add a cuisine, then a list of restaurants that correspond.
+This is a dynamic site that takes user input and generates lists of restaurants and organizes them based on their cuisine using MySQL. Add a cuisine, then a list of restaurants that correspond. Users can click on a cuisine and view all of the restaurants that have that particular cuisine, or simply search the cuisine. The website also allows users to add restaurants, rate them, update, and delete them(or the entire cuisine). The website demonstrates the use of PHP MySQL databases in Silex and Twig (with a one-to-many relationship).
 
 <img src='web/screenshot.png' alt='image of the site'>
 
