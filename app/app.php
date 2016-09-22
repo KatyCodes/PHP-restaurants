@@ -63,7 +63,7 @@
         return $app['twig']->render('cuisine_deleted.html.twig', array('cuisine' => $cuisine));
     });
 
-    //to search restraunts in a cuisine
+    //////////to search restraunts in a cuisine
     $app->post("/searchCuisines{id}", function($id) use ($app) {
         $cuisine_id = $id;
         $cuisine = Cuisine::find($id);
@@ -80,7 +80,7 @@
         return $app['twig']->render('restaurant.html.twig', array('restaurant' => $restaurant, 'cuisine' => $cuisine));
     });
 
-    
+
     $app->get("/confirmDeleteRestaurant/{id}", function($id) use ($app){
         $cuisine = Cuisine::find($id);
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
