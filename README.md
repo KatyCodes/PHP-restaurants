@@ -7,7 +7,8 @@
 ## Description
 
 This is a dynamic site that takes user input and generates lists of restaurants and organizes them based on their cuisine using MySQL. Add a cuisine, then a list of restaurants that correspond.
-<img src='web/screenshot.png' alt='a screenshot of the website'>
+
+<img src='web/screenshot.png' alt='image of the site'>
 
 ## Setup/Installation Requirements
 
