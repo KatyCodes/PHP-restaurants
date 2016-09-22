@@ -28,7 +28,7 @@
                 <h3>Restaurants with {{ cuisine.getType }} food</h3>
                 {% if restaurants is not empty %}
                     {% for restaurant in restaurants %}
-                    <h3>Name: {{ restaurant.getName }}, Rating: {{ restaurant.getRate }} </h3>
+                    <h4><a href="/getRestaurant/{{ restaurant.getId }}">{{ restaurant.getName }}</a> </h4>
                     {% endfor %}
                     <form action="/deleteRestaurants" method="post">
                         <button type="submit" class="btn">Delete Restaurants</button>

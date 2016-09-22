@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
+    <title>Best Restaraunts in Oregon</title>
+</head>
+<body>
+    <h1>Best Restaurants in Oregon</h1>
+    <div class="container">
+            <h3>{{ restaurant.getName }}</h3>
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <form action="/updatedRestaurant/{{ restaurant.getId }}" method="post">
+                    <input type="hidden" value="patch" name="_method">
+                    <label for="name">Update the Name</label>
+                    <input id="name" class="form-control" type="text" name="name">
+                    <label for="rate">Update the Rating</label>
+                    <input id="rate" class="form-control" type="number" name="rate">
+                    <br>
+                    <button class="btn" type="submit">Update Restaurant</button>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <h3>Delete this Restaurant</h3>
+                <form action="/deleteRestaurant/{{ restaurant.getId }}" method="post">
+                    <input name="_method" type="hidden" value="delete">
+                    <button class="btn" type="submit">Delete Restaurant</button>
+                </form>
+            </div>
+            <br>
+        </div>
+        <br>
+        <a href="/">Home</a>
+    </div>
+</body>
+</html>

@@ -34,6 +34,11 @@
             return $this->name;
         }
 
+        function setRate($rate)
+        {
+            $this->rate = (int) $rate;
+        }
+
         function getRate()
         {
             return $this->rate;
@@ -43,6 +48,14 @@
         {
             $GLOBALS['DB']->exec("INSERT INTO restaurants (cuisine_id, name, rate) VALUES ({$this->getCuisineId()}, '{$this->getName()}', {$this->getRate()})");
             $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        function update($new_name, $new_rate)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurants SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE restaurants SET rate = '{$new_rate}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+            $this->setRate($new_rate);
         }
 
         static function getAll()
