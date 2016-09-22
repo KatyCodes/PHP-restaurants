@@ -31,8 +31,31 @@
                     <input name="search" type="text" required>
                     <button type="submit">Search!</button>
                 </form>
+                <hr>
                     {% for restaurant in restaurants %}
-                    <h4><a href="/getRestaurant/{{ restaurant.getId }}">{{ restaurant.getName }}</a></h4>
+                    <h4><a href="/getRestaurant/{{ restaurant.getId }}">{{ restaurant.getName }} </a> &nbsp;
+                        {% if restaurant.getRate == 1 %}
+                            <img src="/star.png">
+                        {% elseif restaurant.getRate == 2 %}
+                            <img src="/star.png">
+                            <img src="/star.png">
+                        {% elseif restaurant.getRate == 3 %}
+                            <img src="/star.png">
+                            <img src="/star.png">
+                            <img src="/star.png">
+                        {% elseif restaurant.getRate == 4 %}
+                            <img src="/star.png">
+                            <img src="/star.png">
+                            <img src="/star.png">
+                            <img src="/star.png">
+                        {% else %}
+                            <img src="/star.png">
+                            <img src="/star.png">
+                            <img src="/star.png">
+                            <img src="/star.png">
+                            <img src="/star.png">
+                        {% endif %}
+                    </h4>
                     {% endfor %}
                     <form action="/deleteRestaurants" method="post">
                         <button type="submit" class="btn">Delete ALL Restaurants</button>
