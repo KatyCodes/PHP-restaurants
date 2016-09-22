@@ -70,6 +70,13 @@
         return $app['twig']->render('restaurant.html.twig', array('restaurant' => $restaurant, 'cuisine' => $cuisine));
     });
 
+    //leads to individual restaurant info page
+    $app->get("/confirmDeleteRestaurant/{id}", function($id) use ($app){
+        // $restaurant = Restaurant::find($id);
+        $cuisine = Cuisine::find($id);
+        return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
+    });
+
     $app->post("/addRestaurant", function() use ($app) {
         $name = $_POST['name'];
         $rate = $_POST['rate'];
@@ -93,8 +100,9 @@
     //to delete an individual restaurant
     $app->delete("/deleteRestaurant/{id}", function($id) use ($app){
         $restaurant = Restaurant::find($id);
+        $cuisine = Cuisine::find($restaurant->getCuisineId());
         $restaurant->delete();
-        return $app['twig']->render('restaurant_deleted.html.twig', array('restaurant' => $restaurant));
+        return $app['twig']->render('restaurant_deleted.html.twig', array('restaurant' => $restaurant, 'cuisine' => $cuisine));
     });
 
     //to delete all restaurants in a cuisine

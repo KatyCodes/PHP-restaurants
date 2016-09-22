@@ -11,6 +11,9 @@
     <h1>Best Restaurants in Oregon</h1>
     <div class="container">
         <h2>You have deleted {{ restaurant.getName }}!</h2>
+        <form action="/confirmDeleteRestaurant/{{ cuisine.getId }}">
+            <button class="btn">Ok</button>
+        </form>
         <br>
         <p>
             You don't have to go <a href="/">Home</a> but you can't stay here.
