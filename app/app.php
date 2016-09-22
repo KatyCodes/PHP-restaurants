@@ -85,8 +85,9 @@
         $name = $_POST['name'];
         $rate = $_POST['rate'];
         $restaurant = Restaurant::find($id);
+        $cuisine = Cuisine::find($restaurant->getCuisineId());
         $restaurant->update($name, $rate);
-        return $app['twig']->render('restaurant.html.twig', array('restaurant' => $restaurant));
+        return $app['twig']->render('restaurant.html.twig', array('restaurant' => $restaurant, 'cuisine' => $cuisine));
     });
 
     //to delete an individual restaurant
